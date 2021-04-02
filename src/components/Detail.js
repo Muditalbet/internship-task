@@ -2,21 +2,23 @@ import React ,{Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import { selectUser } from '../actions/Action'
-
+import '../CSS/About.css'
 class Detail extends Component{
 
     createListItems(){
-        // var flag = false
         return this.props.content.map((element)=>{
             if(element.id == this.props.match.params.id) {
                 return (
-                    <div key={element.id}>
-                        {console.log("check: ", element)}
-                        <h1>{element.name}</h1>
-                        <h4>{element.price}</h4>
-                        <h6>{element.description}</h6>
-                        <br />
-                        <span onClick={() => this.props.selectUser(element)}>Add to cart</span>
+                    <div className='main-about' key={element.id}>
+                        <div className='image'>
+                            <img src={require('../Pictures/'+ element.photo).default} />
+                        </div>
+                        <div className='content'>
+                            <h1>{element.name}</h1>
+                            <h4>{element.price} Rs</h4>
+                            <span onClick={() => this.props.selectUser(element)}>Add to cart</span>
+                            <h6>{element.description}</h6>
+                        </div>
                     </div>
                 )
             }

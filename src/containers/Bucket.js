@@ -1,18 +1,26 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import '../CSS/Cart.css'
 
 class Bucket extends Component{
     
     createListItems(){
         if(!this.props.bucket) return (
-            <h4>Nothing selected...</h4>
+            <div>Nothing selected...</div>
         )
         return this.props.bucket.map((element)=>{
             return(
-                <div key = {element.id}>
-                    <h4>{element.name}: </h4>
-                    <h7>{element.description}</h7>
-                    <br />
+                <div key = {element.id} className='cart-card'>
+                    <Link to={'/about/'+element.id}>
+                        <div className='image'>
+                            <img src={require('../Pictures/'+element.photo).default}></img>
+                        </div>
+                        <div className='item-content'>
+                            <span>{element.name}</span>
+                            <h6>{element.price}</h6>
+                        </div>
+                    </Link>
                 </div>
             )
         })
@@ -30,15 +38,18 @@ class Bucket extends Component{
     
     render(){
         if(!this.props.bucket){
-            return( <h4>Select user...</h4> )
+            return( <div className='select-item'>Your cart is empty!!!</div> )
         }
         return(
-            <div>
-                total items: {this.props.bucket.length}
-                <ul>
-                    {this.createListItems()}
-                </ul>
-                total price: {this.totalPrice()}
+            <div className='cart-main'>
+                <span>Total items: {this.props.bucket.length}</span>
+                {this.createListItems()}
+                <hr />
+                <div className='total'>
+                    Net total 
+                    <div className='value'> {this.totalPrice()} </div>
+                    Rs
+                </div>
             </div>
         )
     }

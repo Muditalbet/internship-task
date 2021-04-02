@@ -4,7 +4,6 @@ import Bucket from '../containers/Bucket'
 function Cart() {
     return (
         <div>
-            <h1>Your cart: </h1>
             <Bucket />
         </div>
     )

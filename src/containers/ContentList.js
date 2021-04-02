@@ -3,23 +3,23 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {selectUser} from '../actions/Action'
 import {Link} from 'react-router-dom'
+import '../CSS/Items.css'
 
 class ContentList extends Component{
     
     createListItems(){
         return this.props.content.map((element)=>{
             return (
-                <div key={element.id}>
+                <div key={element.id} className='card'>
                     <Link to={"/about/" + element.id}>
-                        <li >{element.name}</li>
-                        <br></br>
-                        {element.price} Rs
-                        <br />
-                        {/* <span onClick={() => this.props.selectUser(element)}>Add To Cart</span> */}
-                        <br></br>
-
-                        <hr />
-                        <br></br>
+                        <div className="image">
+                            <img src = {require('../Pictures/'+element.photo).default}></img>
+                        </div>
+                        <div className='item-content'>
+                            <span >{element.name}</span>
+                            <br></br>
+                            <h6>{element.price} Rs</h6>
+                        </div>
                     </Link>
                 </div>
             );
@@ -28,9 +28,12 @@ class ContentList extends Component{
     
     render(){
         return(
-            <ul>
+            <div className="main-home">
+                {/* <ul>
+                    {this.createListItems()}
+                </ul> */}
                 {this.createListItems()}
-            </ul>
+            </div>
         )
     }
 }
