@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 class Bucket extends Component{
     
     createListItems(){
-        console.log("testing bucket: ", this.props.bucket)
         if(!this.props.bucket) return (
             <h4>Nothing selected...</h4>
         )
@@ -18,22 +17,29 @@ class Bucket extends Component{
             )
         })
     }
+    totalPrice(){
+        if(!this.props.bucket) return (
+            <h4>0</h4>
+        )
+        var cost = 0
+        this.props.bucket.map((element)=>{
+            cost = cost + element.price 
+        })
+        return cost
+    }
     
     render(){
         if(!this.props.bucket){
             return( <h4>Select user...</h4> )
         }
-        // return(
-        //     <div>
-        //         <h2>{this.props.bucket.name}</h2>
-        //         <br />
-        //         <h2>{this.props.bucket.description}</h2>
-        //     </div>
-        // )
         return(
-            <ul>
-                {this.createListItems()}
-            </ul>
+            <div>
+                total items: {this.props.bucket.length}
+                <ul>
+                    {this.createListItems()}
+                </ul>
+                total price: {this.totalPrice()}
+            </div>
         )
     }
 }
